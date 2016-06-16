@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface ParserResult {
 
-    void onSuccessed(ArrayList<T> result);
+    void onSucceed(ArrayList<T> result);
 
     void onError(int code, Exception e);
 
