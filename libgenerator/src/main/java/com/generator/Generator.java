@@ -1,4 +1,4 @@
-package com.example;
+package com.generator;
 
 
 import com.sun.codemodel.JBlock;
@@ -16,13 +16,13 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class MyClass {
+public class Generator {
 
     public static void main(String[] args) throws IOException {
         try {
 
             File dir = new File("app/src/main/java/com/yanxinwei/exceloperator/targetmodel");
-            System.out.println("dir:"+dir.getAbsolutePath());
+            System.out.println("dir:" + dir.getAbsolutePath());
             JCodeModel jcm = new JCodeModel();
             JDefinedClass jdc = jcm._class("Target");
             //定义成员变量
@@ -42,17 +42,11 @@ public class MyClass {
 
             String packageName = "package com.yanxinwei.exceloperator.targetmodel;";
             String javaPath = dir.getAbsolutePath().concat("/Target.java");
-//            RandomAccessFile raf = new RandomAccessFile(javaPath, "rw");
-//            raf.seek(0);
-//            raf.write(packageName.getBytes());
-//            raf.write('\r');
-//            raf.write('\n');
-//            raf.close();
             File targetFile = new File(javaPath);
             BufferedReader br = new BufferedReader(new FileReader(targetFile));
             String result = packageName + "\r\n";
             String line;
-            while( (line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 result = result + line;
             }
             targetFile.delete();
@@ -62,6 +56,7 @@ public class MyClass {
         } catch (JClassAlreadyExistsException e) {
             e.printStackTrace();
         }
+
     }
 
 }

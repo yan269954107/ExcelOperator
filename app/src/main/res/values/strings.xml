@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">ExcelOperator</string>
+
+    <string name="save">保存</string>
+
+    <string name="equipment">装置</string>
+    <string name="area">区域</string>
+    <string name="tag_number">TAG号</string>
+    <string name="extension_number">扩展号</string>
+    <string name="flag_number">FLAG号</string>
+    <string name="pic_number">图号</string>
+    <string name="main_reference">主要参考物</string>
+    <string name="orientation">方向</string>
+    <string name="distance">距离(m)</string>
+    <string name="floor">楼层</string>
+    <string name="height">高度</string>
+    <string name="unit_type">组件类型</string>
+    <string name="unit_sub_type">组件子类型</string>
+    <string name="size">尺寸(mm)</string>
+    <string name="extra_des">附加描述</string>
+    <string name="medium_states">介质状态</string>
+    <string name="high">高空</string>
+    <string name="not_arrive">不可达</string>
+    <string name="preserve">保温</string>
+    <string name="extension">扩展</string>
 </resources>

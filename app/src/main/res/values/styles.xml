@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <declare-styleable name="ParamsBlock">
+        <attr name="pb_text" format="string" />
+        <attr name="pb_has_relation" format="boolean" />
+    </declare-styleable>
+
 </resources>

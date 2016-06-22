@@ -1,9 +1,8 @@
-package com.yanxinwei.exceloperator.excelparser;
+package com.generator.excelparser;
 
-import android.util.Log;
-
-import com.yanxinwei.exceloperator.common.AppConstants;
-import com.yanxinwei.exceloperator.targetmodel.ParserTarget;
+import com.generator.common.Constants;
+import com.generator.targetmodel.GeneratorTarget;
+import com.generator.targetmodel.ParserTarget;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -34,12 +33,12 @@ public class ExcelParser {
                 Class clazz = target.getClass();
                 Field[] fields = clazz.getDeclaredFields();
                 for (Field field : fields) {
-                    Log.d("tag", "@@@@ fieldName : "+field.getName());
+                    System.out.println("@@@@ fieldName : "+field.getName());
                 }
                 break;
             }
         } catch (IOException e) {
-            result.onError(AppConstants.ERROR_FILE_NOT_FIND, e);
+            result.onError(Constants.ERROR_FILE_NOT_FIND, e);
         }
     }
 
@@ -62,7 +61,7 @@ public class ExcelParser {
 
             }
         } catch (IOException e) {
-            result.onError(AppConstants.ERROR_FILE_NOT_FIND, e);
+            result.onError(Constants.ERROR_FILE_NOT_FIND, e);
         }
     }
 
@@ -72,4 +71,21 @@ public class ExcelParser {
         Sheet sheet = workbook.getSheetAt(index);
         return sheet;
     }
+
+    private Row getTargetRow(String path, int sheetIndex, int targetRow) throws IOException {
+        Sheet sheet = getTargetSheet(path, sheetIndex);
+        return sheet.getRow(targetRow);
+    }
+
+    public String[] getTargetFieldNames(GeneratorTarget target) {
+        String[] result = null;
+        try {
+            Row row = getTargetRow(target.getExcelPath(), target.sheetAtIndex(), target.targetRow());
+            int cellCount = row.getPhysicalNumberOfCells();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

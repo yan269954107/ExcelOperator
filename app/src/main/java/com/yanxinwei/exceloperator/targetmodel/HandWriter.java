@@ -1,9 +1,11 @@
 package com.yanxinwei.exceloperator.targetmodel;
 
+import com.generator.targetmodel.ParserTarget;
+
 /**
  * Created by yanxinwei on 16/6/14.
  */
-public class HandWriter implements ParserTarget{
+public class HandWriter implements ParserTarget {
 
     private String a_position1;
     private String b_position2;
@@ -45,6 +47,11 @@ public class HandWriter implements ParserTarget{
     @Override
     public int sheetAtIndex() {
         return 0;
+    }
+
+    @Override
+    public String getExcelPath() {
+        return "target.xlsx";
     }
 
     @Override

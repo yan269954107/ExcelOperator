@@ -5,6 +5,4 @@ package com.yanxinwei.exceloperator.common;
  */
 public interface AppConstants {
 
-    int ERROR_FILE_NOT_FIND = -1;
-
 }
