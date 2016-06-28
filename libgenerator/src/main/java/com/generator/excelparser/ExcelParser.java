@@ -82,6 +82,13 @@ public class ExcelParser {
         try {
             Row row = getTargetRow(target.getExcelPath(), target.sheetAtIndex(), target.targetRow());
             int cellCount = row.getPhysicalNumberOfCells();
+            result = new String[cellCount];
+            Cell cell;
+            for (int i = 0; i < cellCount; i++) {
+                cell = row.getCell(i);
+                System.out.println(ExcelUtils.convertCellValueToString(cell));
+                result[i] = ExcelUtils.convertCellValueToString(cell);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
