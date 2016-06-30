@@ -1,5 +1,6 @@
-package com.yanxinwei.exceloperator.targetmodel;
+package com.generator.targetmodel.model;
 
+import com.generator.excelparser.CellType;
 import com.generator.targetmodel.ParserTarget;
 
 public class Hand extends ParserTarget{
@@ -31,6 +32,7 @@ public class Hand extends ParserTarget{
     private String maz_lujinghao;
     private String mba_biangengguanliID;
     private String mbb_nianyunxingshijian;
+    @CellType(type = CellType.DATE)
     private String mbc_tianjiariqi;
     private String mbd_nanyichuji;
     private String mbe_nanyujiance;
@@ -447,7 +449,18 @@ public class Hand extends ParserTarget{
     }
 
     @Override
-    public String getPath() {
-        return mExcelPath;
+    public String toString() {
+        return "Hand{" +
+                "maa_weizhi1='" + maa_weizhi1 + '\'' +
+                ", mab_weizhi2='" + mab_weizhi2 + '\'' +
+                ", mac_weizhi3='" + mac_weizhi3 + '\'' +
+                ", mad_biaoqian='" + mad_biaoqian + '\'' +
+                ", mae_kuozhanhao='" + mae_kuozhanhao + '\'' +
+                ", maf_tuhao='" + maf_tuhao + '\'' +
+                ", mag_zhuyaocankaowu='" + mag_zhuyaocankaowu + '\'' +
+                ", mah_fangxiang='" + mah_fangxiang + '\'' +
+                ", mai_juli=" + mai_juli +
+                ", maj_danwei='" + maj_danwei + '\'' +
+                '}';
     }
 }

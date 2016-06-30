@@ -1,5 +1,7 @@
 package com.generator.generator;
 
+import com.generator.common.StrUtils;
+
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
@@ -9,8 +11,6 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * Created by yanxinwei on 16/6/26.
  */
 public class PinyinUtils {
-
-    private static String PREFIX_CURRENT = "aa_";
 
     private static final HanyuPinyinOutputFormat outputFormat = new HanyuPinyinOutputFormat();
 
@@ -30,7 +30,7 @@ public class PinyinUtils {
 
     private static String getParamsName(String params) {
         try {
-            StringBuilder sb = new StringBuilder(getPrefix());
+            StringBuilder sb = new StringBuilder(StrUtils.getPrefix());
             for (int i = 0; i < params.length(); i++) {
                 char c = params.charAt(i);
                 if (Character.toString(c).matches("[\\u4E00-\\u9FA5]+")) {
@@ -50,19 +50,6 @@ public class PinyinUtils {
             badHanyuPinyinOutputFormatCombination.printStackTrace();
         }
         return null;
-    }
-
-    private static String getPrefix() {
-        String result = PREFIX_CURRENT;
-        char first = PREFIX_CURRENT.charAt(0);
-        char second = PREFIX_CURRENT.charAt(1);
-        second ++;
-        if (second > 'z') {
-            first ++;
-            second = 'a';
-        }
-        PREFIX_CURRENT = String.valueOf(new char[]{first, second, '_'});
-        return result;
     }
 
     public static String toUpperCaseFirstOne(String str) {

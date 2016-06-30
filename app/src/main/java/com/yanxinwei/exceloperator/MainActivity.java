@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 //        AssetManager manager = getAssets();
 //        try {
 //            HandWriter handWriter = new HandWriter();
-//            InputStream is = manager.open(handWriter.getExcelPath());
+//            InputStream is = manager.open(handWriter.getPath());
 //            ExcelParser parser = new ExcelParser();
 //            parser.loadExcel(is, handWriter, new ParserResult() {
 //                @Override

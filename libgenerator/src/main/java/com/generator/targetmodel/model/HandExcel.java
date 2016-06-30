@@ -37,7 +37,7 @@ public class HandExcel implements GeneratorTarget {
     }
 
     @Override
-    public String getExcelPath() {
+    public String getPath() {
         return "target.xlsx";
     }
 }

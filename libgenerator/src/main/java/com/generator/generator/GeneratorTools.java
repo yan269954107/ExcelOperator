@@ -1,5 +1,6 @@
 package com.generator.generator;
 
+import com.generator.common.StrUtils;
 import com.generator.excelparser.ExcelParser;
 import com.generator.targetmodel.GeneratorTarget;
 import com.sun.codemodel.JBlock;
@@ -22,15 +23,12 @@ import java.io.IOException;
  */
 public class GeneratorTools {
 
-    private static final String SET_PREFIX = "set";
-    private static final String GET_PREFIX = "get_";
-
     public static void createJavaFile(GeneratorTarget target) throws JClassAlreadyExistsException, IOException {
         File file = new File(target.targetPath());
         JCodeModel jcm = new JCodeModel();
         JDefinedClass jdc = jcm._class(target.targetName());
 
-        ExcelParser excelParser = new ExcelParser();
+        ExcelParser excelParser = ExcelParser.getInstance();
         String[] fields = excelParser.getTargetFieldNames(target);
 
         String[] convertedFields = PinyinUtils.convertToPinyin(fields);
@@ -59,35 +57,25 @@ public class GeneratorTools {
     }
 
     private static void generatorFields(JDefinedClass jdc, String fieldName) {
-        jdc.field(JMod.PRIVATE, String.class, getFieldName(fieldName));
+        jdc.field(JMod.PRIVATE, String.class, StrUtils.getFieldName(fieldName));
         definedSetGetMethod(jdc, fieldName);
     }
 
     private static void definedSetGetMethod(JDefinedClass jdc, String fieldName) {
         //定义set方法
-        JMethod setA_abcMethod = jdc.method(JMod.PUBLIC, void.class, getSetMethodName(fieldName));
+        JMethod setA_abcMethod = jdc.method(JMod.PUBLIC, void.class, StrUtils.getSetMethodName(fieldName));
         setA_abcMethod.param(String.class, fieldName);
         JBlock setA_abcBody = setA_abcMethod.body();
-        JFieldRef fieldA_abc = JExpr.ref(getFieldName(fieldName));
+        JFieldRef fieldA_abc = JExpr.ref(StrUtils.getFieldName(fieldName));
         setA_abcBody.assign(fieldA_abc, JExpr.ref(fieldName));
         definedGetMethod(jdc, fieldA_abc, fieldName);
     }
 
-    private static String getFieldName(String fieldName) {
-        return "m" + fieldName;
-    }
 
-    private static String getSetMethodName(String fieldName) {
-        return SET_PREFIX + PinyinUtils.toUpperCaseFirstOne(fieldName);
-    }
-
-    private static String getGetMethodName(String fieldName) {
-        return GET_PREFIX + PinyinUtils.toUpperCaseFirstOne(fieldName);
-    }
 
     private static void definedGetMethod(JDefinedClass jdc, JFieldRef fieldA_abc, String fieldName) {
         //定义get方法
-        JMethod getA_abcMethod = jdc.method(JMod.PUBLIC, String.class, getGetMethodName(fieldName));
+        JMethod getA_abcMethod = jdc.method(JMod.PUBLIC, String.class, StrUtils.getGetMethodName(fieldName));
         JBlock getA_abcBody = getA_abcMethod.body();
         getA_abcBody._return(fieldA_abc);
     }

@@ -9,6 +9,6 @@ public interface Target {
     int sheetAtIndex();
 
     //目标excel的路径
-    String getExcelPath();
+    String getPath();
 
 }
