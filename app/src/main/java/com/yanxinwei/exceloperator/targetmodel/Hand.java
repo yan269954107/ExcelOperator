@@ -2,55 +2,57 @@ package com.yanxinwei.exceloperator.targetmodel;
 
 import com.generator.targetmodel.ParserTarget;
 
-public class Hand extends ParserTarget{
-    private String maa_weizhi1;
-    private String mab_weizhi2;
-    private String mac_weizhi3;
-    private String mad_biaoqian;
-    private String mae_kuozhanhao;
-    private String maf_tuhao;
-    private String mag_zhuyaocankaowu;
-    private String mah_fangxiang;
+import java.io.Serializable;
+
+public class Hand extends ParserTarget implements Serializable{
+    private String maa_weizhi1 = "";
+    private String mab_weizhi2 = "";
+    private String mac_weizhi3 = "";
+    private String mad_biaoqian = "";
+    private String mae_kuozhanhao = "";
+    private String maf_tuhao = "";
+    private String mag_zhuyaocankaowu = "";
+    private String mah_fangxiang = "";
     private double mai_juli;
-    private String maj_danwei;
-    private String mak_ciyaocankaowu;
-    private String mal_fangxiang;
-    private String mam_juli;
-    private String man_danwei;
+    private String maj_danwei = "";
+    private String mak_ciyaocankaowu = "";
+    private String mal_fangxiang = "";
+    private String mam_juli = "";
+    private String man_danwei = "";
     private int mao_louceng;
     private double map_gaodu;
-    private String maq_danwei;
-    private String mar_fujiamiaoshu;
-    private String mas_zujianleixing;
-    private String mat_zujianzileixing;
+    private String maq_danwei = "";
+    private String mar_fujiamiaoshu = "";
+    private String mas_zujianleixing = "";
+    private String mat_zujianzileixing = "";
     private int mau_chicun;
-    private String mav_jiezhizhuangtai;
+    private String mav_jiezhizhuangtai = "";
     private int maw_chanpinliu;
-    private String max_jiancepeijian;
-    private String may_shengchanchangjia;
-    private String maz_lujinghao;
-    private String mba_biangengguanliID;
-    private String mbb_nianyunxingshijian;
-    private String mbc_tianjiariqi;
-    private String mbd_nanyichuji;
-    private String mbe_nanyujiance;
-    private String mbf_nanyujianceyuanyin;
-    private String mbg_xianyujiance;
-    private String mbh_xianyujianceyuanyin;
-    private String mbi_kongzhishebei;
-    private String mbj_leixing;
-    private String mbk_shebeifuyazuoye;
-    private String mbl_dixielouzujian;
-    private String mbm_weiyuzhuangxieliaozhanchuguanqu;
-    private String mbn_nianpaifangshijianshaoyu300h;
-    private String mbo_zujianbeijueyuan;
-    private String mbp_kaikouguanxian;
-    private String mbq_kaikouguanxianleixing;
-    private String mbr_EMshebeibianma;
-    private String mbs_zhuyaojiezhi;
-    private String mbt_caozuowendu;
-    private String mbu_caozuoyali;
-    private String mbv_mifengcaizhi;
+    private String max_jiancepeijian = "";
+    private String may_shengchanchangjia = "";
+    private String maz_lujinghao = "";
+    private String mba_biangengguanliID = "";
+    private String mbb_nianyunxingshijian = "";
+    private String mbc_tianjiariqi = "";
+    private String mbd_nanyichuji = "";
+    private String mbe_nanyujiance = "";
+    private String mbf_nanyujianceyuanyin = "";
+    private String mbg_xianyujiance = "";
+    private String mbh_xianyujianceyuanyin = "";
+    private String mbi_kongzhishebei = "";
+    private String mbj_leixing = "";
+    private String mbk_shebeifuyazuoye = "";
+    private String mbl_dixielouzujian = "";
+    private String mbm_weiyuzhuangxieliaozhanchuguanqu = "";
+    private String mbn_nianpaifangshijianshaoyu300h = "";
+    private String mbo_zujianbeijueyuan = "";
+    private String mbp_kaikouguanxian = "";
+    private String mbq_kaikouguanxianleixing = "";
+    private String mbr_EMshebeibianma = "";
+    private String mbs_zhuyaojiezhi = "";
+    private String mbt_caozuowendu = "";
+    private String mbu_caozuoyali = "";
+    private String mbv_mifengcaizhi = "";
 
     public void setAa_weizhi1(String aa_weizhi1) {
         maa_weizhi1 = aa_weizhi1;
@@ -447,7 +449,18 @@ public class Hand extends ParserTarget{
     }
 
     @Override
-    public String getPath() {
-        return mExcelPath;
+    public String toString() {
+        return "Hand{" +
+                "maa_weizhi1='" + maa_weizhi1 + '\'' +
+                ", mab_weizhi2='" + mab_weizhi2 + '\'' +
+                ", mac_weizhi3='" + mac_weizhi3 + '\'' +
+                ", mad_biaoqian='" + mad_biaoqian + '\'' +
+                ", mae_kuozhanhao='" + mae_kuozhanhao + '\'' +
+                ", maf_tuhao='" + maf_tuhao + '\'' +
+                ", mag_zhuyaocankaowu='" + mag_zhuyaocankaowu + '\'' +
+                ", mah_fangxiang='" + mah_fangxiang + '\'' +
+                ", mai_juli=" + mai_juli +
+                ", maj_danwei='" + maj_danwei + '\'' +
+                '}';
     }
 }

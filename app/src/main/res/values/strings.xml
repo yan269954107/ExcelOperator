@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">ExcelOperator</string>
+    <string name="file_list">文件列表</string>
+    <string name="empty_file_hint">请导入需要检测的excel文件至sdcard/Target目录</string>
+    <string name="empty_target_hint">该文件未有需要检测的数据</string>
 
     <string name="save">保存</string>
+    <string name="confirm">确定</string>
+    <string name="add">添加</string>
 
     <string name="equipment">装置</string>
     <string name="area">区域</string>
@@ -23,4 +28,12 @@
     <string name="not_arrive">不可达</string>
     <string name="preserve">保温</string>
     <string name="extension">扩展</string>
+
+
+    <string name="extension_count">扩展个数</string>
+    <string name="extension_symbol">扩展符号</string>
+    <string name="extension_size">扩展尺寸</string>
+
+    <string name="hand_write_hint">请在这里手写输入</string>
+    <string name="extra_empty_hint">没有对应的附加描述可供选择</string>
 </resources>

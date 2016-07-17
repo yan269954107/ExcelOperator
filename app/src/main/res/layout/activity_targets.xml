@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yanxinwei.exceloperator.MainActivity">
+    tools:context="com.yanxinwei.exceloperator.activity.TargetsActivity">
 
     <ListView
         android:id="@+id/list_targets"
@@ -17,11 +18,21 @@
     </ListView>
 
     <TextView
+        android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/empty_view"
-        android:visibility="gone"
-        android:text="@string/empty_file_hint"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/empty_target_hint"
+        android:visibility="gone"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/ic_add_white_48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
 </RelativeLayout>

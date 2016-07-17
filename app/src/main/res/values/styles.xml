@@ -12,6 +12,8 @@
     <declare-styleable name="ParamsBlock">
         <attr name="pb_text" format="string" />
         <attr name="pb_has_relation" format="boolean" />
+        <attr name="pb_focusable" format="boolean"/>
+        <attr name="android:inputType"/>
     </declare-styleable>
 
 </resources>

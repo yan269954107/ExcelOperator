@@ -10,6 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@android:color/white"
     tools:context="com.yanxinwei.exceloperator.activity.HandWriteActivity">
 
     <LinearLayout
@@ -19,15 +20,49 @@
         android:orientation="horizontal">
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_equipment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:pb_text="@string/save"/>
+            app:pb_text="@string/equipment"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_area"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:pb_text="@string/area"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_tag_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/tag_number"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_extension_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/extension_number"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_flag_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/flag_number"
+            android:inputType="number"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_pic_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/pic_number"/>
 
     </LinearLayout>
 
@@ -37,6 +72,45 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_main_reference"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            app:pb_text="@string/main_reference"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_orientation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25"
+            app:pb_text="@string/orientation"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_distance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25"
+            app:pb_text="@string/distance"
+            android:inputType="numberDecimal"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_floor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25"
+            app:pb_text="@string/floor"
+            android:inputType="number"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_height"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25"
+            app:pb_text="@string/height"
+            android:inputType="numberDecimal"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,6 +119,39 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_unit_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            app:pb_text="@string/unit_type"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_unit_sub_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            app:pb_text="@string/unit_sub_type"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_size"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            app:pb_text="@string/size"
+            android:inputType="number"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_extra_des"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            app:pb_has_relation="true"
+            app:pb_text="@string/extra_des"
+            app:pb_focusable="false"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,6 +159,46 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_medium_states"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            app:pb_text="@string/medium_states"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_high"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/high"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_not_arrive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/not_arrive"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_preserve"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:pb_text="@string/preserve"
+            app:pb_focusable="false"/>
+
+        <com.yanxinwei.exceloperator.widget.ParamsBlock
+            android:id="@+id/pb_extension"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            app:pb_text="@string/extension"
+            app:pb_focusable="false"/>
 
     </LinearLayout>
 

@@ -12,5 +12,7 @@ public interface Constants {
     int ERROR_INVOCATION_TARGET = -5;
     int ERROR_LOAD_FAILED = -6;
     int ERROR_SAVE_FAILED = -7;
+    int ERROR_INSERT_FAILED = -8;
+    int ERROR_REMOVE_FAILED = -8;
 
 }

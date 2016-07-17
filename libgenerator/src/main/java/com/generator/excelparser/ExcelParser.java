@@ -26,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 这里用的是poi做解析,这里就跟poi耦合在一起了,
@@ -37,6 +38,9 @@ public class ExcelParser {
 
     private HandlerThread mHandlerThread;
     private Handler mHandler;
+
+    private InputStream mInputStream;
+    private XSSFWorkbook mWorkbook;
 
     private static ExcelParser sExcelParser = null;
 
@@ -59,16 +63,17 @@ public class ExcelParser {
     }
 
     public void init() {
-//        if (mHandlerThread == null) {
-//            mHandlerThread = new HandlerThread("parser thread");
-//            mHandler = new Handler(mHandlerThread.getLooper());
-//        }
+        if (mHandlerThread == null) {
+            mHandlerThread = new HandlerThread("parser thread");
+            mHandlerThread.start();
+            mHandler = new Handler(mHandlerThread.getLooper());
+        }
     }
 
     public void recycle() {
-//        if (mHandlerThread != null) {
-//            mHandlerThread.quit();
-//        }
+        if (mHandlerThread != null) {
+            mHandlerThread.quit();
+        }
     }
 
     public void loadExcel(InputStream is, ParserTarget target, ParserResult result) {
@@ -122,13 +127,13 @@ public class ExcelParser {
                         obj.setRow(r);
                         obj.setPath(target.getPath());
                         datas.add(obj);
-                        Handlers.postMain(new Runnable() {
-                            @Override
-                            public void run() {
-                                result.onSucceed(datas);
-                            }
-                        });
                     }
+                    Handlers.postMain(new Runnable() {
+                        @Override
+                        public void run() {
+                            result.onSucceed(datas);
+                        }
+                    });
                 } catch (IOException | NoSuchMethodException | IllegalAccessException | InstantiationException
                         | InvocationTargetException e) {
                     Handlers.postMain(new Runnable() {
@@ -137,67 +142,58 @@ public class ExcelParser {
                             result.onError(Constants.ERROR_LOAD_FAILED, e);
                         }
                     });
+                } finally {
+                    closeInputStream();
                 }
             }
         });
 
     }
 
-    public void saveToFile(final ParserTarget target, final SaveResult saveResult) {
+    public void saveToFile(final ParserTarget target, final Result result) {
         checkNull();
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 try {
-                    InputStream is = new FileInputStream(target.getPath());
-                    XSSFWorkbook workbook = new XSSFWorkbook(is);
-                    Sheet sheet = workbook.getSheetAt(target.sheetAtIndex());
-                    CreationHelper helper = workbook.getCreationHelper();
+                    Sheet sheet = getTargetSheet(target.getPath(), target.sheetAtIndex());
+                    CreationHelper helper = mWorkbook.getCreationHelper();
                     if (dateCellStyle == null) {
-                        dateCellStyle = workbook.createCellStyle();
+                        dateCellStyle = mWorkbook.createCellStyle();
                         dateCellStyle.setDataFormat(helper.createDataFormat().getFormat(DATE_FORMAT));
                     }
-                    Row row = sheet.getRow(target.getRow());
 
-                    Class clazz = target.getClass();
-                    Field[] fields = clazz.getDeclaredFields();
-                    int i = 0;
-                    for (Field field : fields) {
-                        field.setAccessible(true);
-                        if (field.isAnnotationPresent(CellType.class)) {
-                            System.out.println(field.getName() + " : " + field.get(target) + "   class:" + field.get(target).getClass());
-                            ExcelUtils.setCellDateValue(row, i, (String) field.get(target), dateCellStyle);
-                        } else {
-                            System.out.println(field.getName() + " : " + field.get(target) + "   class:" + field.get(target).getClass());
-                            ExcelUtils.setCellValue(row, i, field.get(target));
-                        }
-                        i++;
-                    }
-
-                    FileOutputStream os = new FileOutputStream(target.getPath());
-                    workbook.write(os);
-
-                    is.close();
-                    os.close();
-
+                    fillData(sheet, target);
+                    writeToFile(target.getPath());
+                    result.onSucceed();
                 } catch (IOException | IllegalAccessException e) {
-                    saveResult.onError(Constants.ERROR_SAVE_FAILED, e);
+                    result.onError(Constants.ERROR_SAVE_FAILED, e);
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    private Sheet getTargetSheet(String path, int index) throws IOException {
-        InputStream is = new FileInputStream(path);
-        XSSFWorkbook workbook = new XSSFWorkbook(is);
-        Sheet sheet = workbook.getSheetAt(index);
-        return sheet;
-    }
+    private void fillData(Sheet sheet, ParserTarget target) throws IllegalAccessException {
+        Row row = sheet.getRow(target.getRow());
+        if (row == null) {
+            row = sheet.createRow(target.getRow());
+        }
 
-    private Row getTargetRow(String path, int sheetIndex, int targetRow) throws IOException {
-        Sheet sheet = getTargetSheet(path, sheetIndex);
-        return sheet.getRow(targetRow);
+        Class clazz = target.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        int i = 0;
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (field.isAnnotationPresent(CellType.class)) {
+                System.out.println(field.getName() + " : " + field.get(target) + "   class:" + field.get(target).getClass());
+                ExcelUtils.setCellDateValue(row, i, (String) field.get(target), dateCellStyle);
+            } else {
+                System.out.println(field.getName() + " : " + field.get(target) + "   class:" + field.get(target).getClass());
+                ExcelUtils.setCellValue(row, i, field.get(target));
+            }
+            i++;
+        }
     }
 
     public String[] getTargetFieldNames(GeneratorTarget target) {
@@ -214,17 +210,117 @@ public class ExcelParser {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            closeInputStream();
         }
         return result;
     }
 
+    public void removeRow(final String path, final int index, final int startRow, final int endRow, final Result result) {
+        checkNull();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Sheet sheet = getTargetSheet(path, index);
+
+                    int lastRowNum = sheet.getLastRowNum();
+                    int removeRow = endRow - startRow + 1;
+                    if (endRow > 0 && endRow < lastRowNum)
+                        sheet.shiftRows(endRow + 1, lastRowNum, -removeRow);
+                    if (endRow == lastRowNum) {
+                        for (int i = startRow; i <= endRow; i++) {
+                            Row removingRow = sheet.getRow(i);
+                            if (removingRow != null)
+                                sheet.removeRow(removingRow);
+                        }
+                    }
+                    writeToFile(path);
+                    result.onSucceed();
+                } catch (IOException e) {
+                    result.onError(Constants.ERROR_REMOVE_FAILED, e);
+                }
+            }
+        });
+    }
+
+    /**
+     * 批量插入excel
+     * @param targets
+     * @throws IOException
+     */
+    public void insertRow(final List<ParserTarget> targets, final Result result) {
+
+        checkNull();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (null == targets || targets.size() == 0) {
+                    result.onSucceed();
+                    return;
+                }
+
+                try {
+                    final ParserTarget startTarget = targets.get(0);
+                    ParserTarget endTarget = targets.get(targets.size() - 1);
+                    int startRow = startTarget.getRow();
+                    int rows = endTarget.getRow() - startTarget.getRow() + 1;
+
+                    Sheet sheet = getTargetSheet(startTarget.getPath(), startTarget.sheetAtIndex());
+
+                    if (startRow < sheet.getLastRowNum()) {
+                        sheet.shiftRows(startRow, sheet.getLastRowNum(), rows, true, false);
+                    }
+
+                    for (ParserTarget target : targets) {
+                        fillData(sheet, target);
+                    }
+
+                    writeToFile(startTarget.getPath());
+                    result.onSucceed();
+                } catch (IOException | IllegalAccessException e) {
+                    result.onError(Constants.ERROR_INSERT_FAILED, e);
+                }
+
+            }
+        });
+
+    }
+
+    private Sheet getTargetSheet(String path, int index) throws IOException {
+        mInputStream = new FileInputStream(path);
+        mWorkbook = new XSSFWorkbook(mInputStream);
+        Sheet sheet = mWorkbook.getSheetAt(index);
+        return sheet;
+    }
+
+    private void writeToFile(String path) throws IOException {
+        FileOutputStream os = new FileOutputStream(path);
+        mWorkbook.write(os);
+
+        closeInputStream();
+        os.close();
+    }
+
+    private Row getTargetRow(String path, int sheetIndex, int targetRow) throws IOException {
+        Sheet sheet = getTargetSheet(path, sheetIndex);
+        return sheet.getRow(targetRow);
+    }
+
+    private void closeInputStream() {
+        try {
+            mInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void checkNull() {
-//        if (mHandlerThread == null) {
-//            mHandlerThread = new HandlerThread("parser thread");
-//        }
-//        if (mHandler == null) {
-//            mHandler = new Handler(mHandlerThread.getLooper());
-//        }
+        if (mHandlerThread == null || !mHandlerThread.isAlive()) {
+            mHandlerThread = new HandlerThread("parser thread");
+            mHandlerThread.start();
+            mHandler = new Handler(mHandlerThread.getLooper());
+        }
     }
 
 }
