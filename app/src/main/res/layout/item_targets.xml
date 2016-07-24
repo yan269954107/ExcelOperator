@@ -5,16 +5,6 @@
                 android:layout_height="30dp"
                 android:layout_margin="10dp">
 
-    <ImageView
-        android:id="@+id/img_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_gray_tick_circle"
-        android:visibility="gone"/>
-
     <TextView
         android:id="@+id/txt_label_number"
         android:layout_width="wrap_content"
@@ -27,14 +17,24 @@
         tools:text="标签号"/>
 
     <TextView
-        android:id="@+id/txt_expand_number"
+        android:id="@+id/txt_area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/txt_label_number"
         android:layout_toRightOf="@+id/txt_label_number"
-        tools:text="扩展号"/>
+        tools:text="区域"/>
+
+    <TextView
+        android:id="@+id/txt_flag_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_area"
+        android:layout_toRightOf="@+id/txt_area"
+        tools:text="flag号"/>
 
     <TextView
         android:id="@+id/txt_pic_number"
@@ -42,19 +42,19 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/txt_expand_number"
-        android:layout_toRightOf="@+id/txt_expand_number"
+        android:layout_toEndOf="@+id/txt_flag_number"
+        android:layout_toRightOf="@+id/txt_flag_number"
         tools:text="图号"/>
 
     <TextView
-        android:id="@+id/txt_position_1"
+        android:id="@+id/txt_main_reference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/txt_pic_number"
         android:layout_toRightOf="@+id/txt_pic_number"
-        tools:text="位置1"/>
+        tools:text="主要参考物"/>
 
     <TextView
         android:id="@+id/txt_orientation"
@@ -62,9 +62,109 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/txt_position_1"
-        android:layout_toRightOf="@+id/txt_position_1"
+        android:layout_toEndOf="@+id/txt_main_reference"
+        android:layout_toRightOf="@+id/txt_main_reference"
         tools:text="方向"/>
+
+    <TextView
+        android:id="@+id/txt_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_orientation"
+        android:layout_toRightOf="@+id/txt_orientation"
+        tools:text="距离"/>
+
+    <TextView
+        android:id="@+id/txt_floor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_distance"
+        android:layout_toRightOf="@+id/txt_distance"
+        tools:text="楼层"/>
+
+    <TextView
+        android:id="@+id/txt_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_floor"
+        android:layout_toRightOf="@+id/txt_floor"
+        tools:text="高度"/>
+
+    <TextView
+        android:id="@+id/txt_unit_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_height"
+        android:layout_toRightOf="@+id/txt_height"
+        tools:text="组件类型"/>
+
+    <TextView
+        android:id="@+id/txt_unit_sub_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_unit_type"
+        android:layout_toRightOf="@+id/txt_unit_type"
+        tools:text="组件子类型"/>
+
+    <TextView
+        android:id="@+id/txt_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_unit_sub_type"
+        android:layout_toRightOf="@+id/txt_unit_sub_type"
+        tools:text="附加描述"/>
+
+    <TextView
+        android:id="@+id/txt_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_extra"
+        android:layout_toRightOf="@+id/txt_extra"
+        tools:text="高空"/>
+
+    <TextView
+        android:id="@+id/txt_unreachable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_high"
+        android:layout_toRightOf="@+id/txt_high"
+        tools:text="不可达"/>
+
+    <TextView
+        android:id="@+id/txt_preserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_unreachable"
+        android:layout_toRightOf="@+id/txt_unreachable"
+        tools:text="保温"/>
+
+    <TextView
+        android:id="@+id/txt_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_preserve"
+        android:layout_toRightOf="@+id/txt_preserve"
+        tools:text="扩展"/>
 
     <View
         android:layout_width="match_parent"

@@ -4,7 +4,9 @@ import android.text.TextUtils;
 
 import com.generator.excelparser.ExcelUtils;
 import com.generator.targetmodel.ParserTarget;
+import com.yanxinwei.exceloperator.MyApplication;
 import com.yanxinwei.exceloperator.common.AppConstants;
+import com.yanxinwei.exceloperator.common.SPUtils;
 import com.yanxinwei.exceloperator.common.Utils;
 import com.yanxinwei.exceloperator.targetmodel.model.UnitInfo;
 
@@ -103,13 +105,13 @@ public class Mapper {
         handVo.setJuli(hand.get_Ai_juli());
         handVo.setKuozhanhao(hand.get_Ae_kuozhanhao());
         handVo.setLouceng(hand.get_Ao_louceng());
-        handVo.setNanyichuji(hand.get_Bd_nanyichuji());
-        handVo.setNanyujiance(hand.get_Be_nanyujiance());
+        handVo.setNanyichuji(hand.get_Be_nanyichuji());
+        handVo.setNanyujiance(hand.get_Bf_nanyujiance());
         handVo.setTuhao(hand.get_Af_tuhao());
         handVo.setWeizhi1(hand.get_Aa_weizhi1());
         handVo.setWeizhi3(hand.get_Ac_weizhi3());
         handVo.setZhuyaocankaowu(hand.get_Ag_zhuyaocankaowu());
-        handVo.setZujianbeijueyuan(hand.get_Bo_zujianbeijueyuan());
+        handVo.setZujianbeijueyuan(hand.get_Bp_zujianbeijueyuan());
         handVo.setZujianleixing(hand.get_As_zujianleixing());
         handVo.setZujianzileixing(hand.get_At_zujianzileixing());
         handVo.setRow(hand.getRow());
@@ -131,16 +133,16 @@ public class Mapper {
         hand.setAi_juli(handVo.getJuli());
         hand.setAe_kuozhanhao(handVo.getKuozhanhao());
         hand.setAo_louceng(handVo.getLouceng());
-        hand.setBd_nanyichuji(handVo.getNanyichuji());
-        hand.setBe_nanyujiance(handVo.getNanyujiance());
+        hand.setBe_nanyichuji(handVo.getNanyichuji());
+        hand.setBf_nanyujiance(handVo.getNanyujiance());
         if (!TextUtils.isEmpty(handVo.getNanyujiance()) && "是".equals(handVo.getNanyujiance())) {
-            hand.setBf_nanyujianceyuanyin(FINANCIAL_TEST_REASON);
+            hand.setBg_nanyujianceyuanyin(FINANCIAL_TEST_REASON);
         }
         hand.setAf_tuhao(handVo.getTuhao());
         hand.setAa_weizhi1(handVo.getWeizhi1());
         hand.setAc_weizhi3(handVo.getWeizhi3());
         hand.setAg_zhuyaocankaowu(handVo.getZhuyaocankaowu());
-        hand.setBo_zujianbeijueyuan(handVo.getZujianbeijueyuan());
+        hand.setBp_zujianbeijueyuan(handVo.getZujianbeijueyuan());
         hand.setAs_zujianleixing(handVo.getZujianleixing());
         hand.setAt_zujianzileixing(handVo.getZujianzileixing());
         hand.setRow(handVo.getRow());
@@ -148,6 +150,7 @@ public class Mapper {
         hand.setAj_danwei(handVo.getDanwei1());
         hand.setAq_danwei(handVo.getDanwei2());
         hand.setBc_tianjiariqi(ExcelUtils.date2.format(new Date()));
+        hand.setBd_miaoshuren((String) SPUtils.get(MyApplication.getInstance(), AppConstants.SHAREPRE_USER_NAME, ""));
         return hand;
     }
 

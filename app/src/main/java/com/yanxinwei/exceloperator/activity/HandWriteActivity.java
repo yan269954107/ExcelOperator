@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -150,6 +151,9 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
         mPbMediumStates.setOnClickListener(this);
         mPbNotArrive.setOnClickListener(this);
         mPbExtraDes.setOnClickListener(this);
+        mPbHigh.setOnClickListener(this);
+        mPbSize.setOnClickListener(this);
+
 
         mPbHeight.setTextWatcher(new MyTextWatcher() {
             @Override
@@ -203,6 +207,7 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.pb_preserve:
             case R.id.pb_not_arrive:
+            case R.id.pb_high:
                 selectYesOrNo(view);
                 break;
             case R.id.pb_unit_type:
@@ -217,7 +222,20 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
             case R.id.pb_extra_des:
                 selectExtraDes();
                 break;
+            case R.id.pb_size:
+                selectSize();
+                break;
         }
+    }
+
+    private void selectSize() {
+        DialogUtils.showDialogListAndInput(AppConstants.ALL_SIZE, "请选择尺寸", this,
+                InputType.TYPE_CLASS_NUMBER, new DialogUtils.DialogListOnItem() {
+                    @Override
+                    public void onItem(String data) {
+                        mPbSize.setValue(data);
+                    }
+                });
     }
 
     private void selectExtraDes() {
@@ -229,7 +247,7 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
         if (null == data) {
             data = new String[0];
         }
-        DialogUtils.showDialogListAndInput(data, "请选择附加描述", this, new DialogUtils.DialogListOnItem() {
+        DialogUtils.showDialogListAndInput(data, "请选择附加描述", this, InputType.TYPE_CLASS_TEXT, new DialogUtils.DialogListOnItem() {
             @Override
             public void onItem(String data) {
                 mPbExtraDes.setValue(data);

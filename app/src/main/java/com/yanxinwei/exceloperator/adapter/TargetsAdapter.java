@@ -1,11 +1,11 @@
 package com.yanxinwei.exceloperator.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yanxinwei.exceloperator.R;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by yanxinwei on 16/7/1.
  */
-public class TargetsAdapter extends BaseAdapter{
+public class TargetsAdapter extends BaseAdapter {
 
     private ArrayList<HandVo> mHandVos;
     private Context mContext;
@@ -47,31 +47,70 @@ public class TargetsAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_targets, parent, false);
             holder = new ViewHolder();
-            holder.imgState = (ImageView) convertView.findViewById(R.id.img_state);
-            holder.txtExpandNumber = (TextView) convertView.findViewById(R.id.txt_expand_number);
             holder.txtLabelNumber = (TextView) convertView.findViewById(R.id.txt_label_number);
-            holder.txtOrientation = (TextView) convertView.findViewById(R.id.txt_orientation);
+            holder.txtArea = (TextView) convertView.findViewById(R.id.txt_area);
+            holder.txtFlagNumber = (TextView) convertView.findViewById(R.id.txt_flag_number);
             holder.txtPicNumber = (TextView) convertView.findViewById(R.id.txt_pic_number);
-            holder.txtPosition1 = (TextView) convertView.findViewById(R.id.txt_position_1);
+            holder.txtMainReference = (TextView) convertView.findViewById(R.id.txt_main_reference);
+            holder.txtOrientation = (TextView) convertView.findViewById(R.id.txt_orientation);
+            holder.txtDistance = (TextView) convertView.findViewById(R.id.txt_distance);
+            holder.txtFloor = (TextView) convertView.findViewById(R.id.txt_floor);
+            holder.txtHeight = (TextView) convertView.findViewById(R.id.txt_height);
+            holder.txtUnitType = (TextView) convertView.findViewById(R.id.txt_unit_type);
+            holder.txtUnitSubType = (TextView) convertView.findViewById(R.id.txt_unit_sub_type);
+            holder.txtExtra = (TextView) convertView.findViewById(R.id.txt_extra);
+            holder.txtHigh = (TextView) convertView.findViewById(R.id.txt_high);
+            holder.txtUnreachable = (TextView) convertView.findViewById(R.id.txt_unreachable);
+            holder.txtPreserve = (TextView) convertView.findViewById(R.id.txt_preserve);
+            holder.txtExpand = (TextView) convertView.findViewById(R.id.txt_expand);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         HandVo handVo = mHandVos.get(position);
         holder.txtLabelNumber.setText(handVo.getBiaoqian());
-        holder.txtExpandNumber.setText(handVo.getKuozhanhao());
-        holder.txtPosition1.setText(handVo.getWeizhi1());
+        holder.txtArea.setText(handVo.getWeizhi3());
+        holder.txtFlagNumber.setText(handVo.getChanpinliu() + "");
         holder.txtPicNumber.setText(handVo.getTuhao());
+        holder.txtMainReference.setText(handVo.getZhuyaocankaowu());
         holder.txtOrientation.setText(handVo.getFangxiang());
+        holder.txtDistance.setText(handVo.getJuli() + "");
+        holder.txtFloor.setText(handVo.getLouceng() + "");
+        holder.txtHeight.setText(handVo.getGaodu() + "");
+        holder.txtUnitType.setText(handVo.getZujianleixing());
+        holder.txtUnitSubType.setText(handVo.getZujianzileixing());
+        holder.txtExtra.setText(handVo.getFujiamiaoshu());
+        holder.txtHigh.setText("高空:" + getDescription(handVo.getNanyichuji()));
+        holder.txtUnreachable.setText("不可达:" + getDescription(handVo.getNanyujiance()));
+        holder.txtPreserve.setText("保温:" + getDescription(handVo.getZujianbeijueyuan()));
+        holder.txtExpand.setText(handVo.getKuozhan());
         return convertView;
     }
 
-    static class ViewHolder{
+    private String getDescription(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return "否";
+        } else {
+            return str;
+        }
+    }
+
+    static class ViewHolder {
         TextView txtLabelNumber;
-        TextView txtExpandNumber;
+        TextView txtArea;
+        TextView txtFlagNumber;
         TextView txtPicNumber;
-        TextView txtPosition1;
+        TextView txtMainReference;
         TextView txtOrientation;
-        ImageView imgState;
+        TextView txtDistance;
+        TextView txtFloor;
+        TextView txtHeight;
+        TextView txtUnitType;
+        TextView txtUnitSubType;
+        TextView txtExtra;
+        TextView txtHigh;
+        TextView txtUnreachable;
+        TextView txtPreserve;
+        TextView txtExpand;
     }
 }

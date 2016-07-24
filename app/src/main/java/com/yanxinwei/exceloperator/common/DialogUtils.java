@@ -19,7 +19,7 @@ import com.yanxinwei.exceloperator.R;
  */
 public class DialogUtils {
 
-    public interface DialogListOnItem{
+    public interface DialogListOnItem {
         void onItem(String data);
     }
 
@@ -69,7 +69,7 @@ public class DialogUtils {
     }
 
     public static void showDialogListAndInput(final String[] datas, String title, final Context context,
-                                              final DialogListOnItem listener) {
+                                              int inputType, final DialogListOnItem listener) {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         View convertView = LayoutInflater.from(context).inflate(R.layout.dialog_list_input_view, null);
         dialogBuilder.setView(convertView);
@@ -92,10 +92,39 @@ public class DialogUtils {
         });
         Button btnConfirm = (Button) convertView.findViewById(R.id.btn_confirm);
         final EditText edtContent = (EditText) convertView.findViewById(R.id.edt_content);
+        edtContent.setInputType(inputType);
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = edtContent.getText().toString();
+                if (TextUtils.isEmpty(content)) {
+                    T.showShort(context, "手写内容不能为空");
+                } else {
+                    if (dialog != null) {
+                        dialog.dismiss();
+                        listener.onItem(content);
+                    }
+                }
+            }
+        });
+    }
+
+    public static void showInputDialog(final Context context, String title, String inputContent,
+                                       final DialogListOnItem listener) {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        View convertView = LayoutInflater.from(context).inflate(R.layout.dialog_input_view, null);
+        dialogBuilder.setView(convertView);
+        dialogBuilder.setTitle(title);
+
+        final EditText editInput = (EditText) convertView.findViewById(R.id.edt_input);
+        editInput.setHint(title);
+        editInput.setText(inputContent);
+        final AlertDialog dialog = dialogBuilder.show();
+        Button btnConfirm = (Button) convertView.findViewById(R.id.btn_confirm);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = editInput.getText().toString();
                 if (TextUtils.isEmpty(content)) {
                     T.showShort(context, "手写内容不能为空");
                 } else {

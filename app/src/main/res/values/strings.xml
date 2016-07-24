@@ -8,6 +8,8 @@
     <string name="confirm">确定</string>
     <string name="add">添加</string>
 
+    <string name="writer">描述人</string>
+
     <string name="equipment">装置</string>
     <string name="area">区域</string>
     <string name="tag_number">TAG号</string>

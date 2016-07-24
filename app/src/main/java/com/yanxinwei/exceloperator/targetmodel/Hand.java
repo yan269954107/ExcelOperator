@@ -34,25 +34,26 @@ public class Hand extends ParserTarget implements Serializable{
     private String mba_biangengguanliID = "";
     private String mbb_nianyunxingshijian = "";
     private String mbc_tianjiariqi = "";
-    private String mbd_nanyichuji = "";
-    private String mbe_nanyujiance = "";
-    private String mbf_nanyujianceyuanyin = "";
-    private String mbg_xianyujiance = "";
-    private String mbh_xianyujianceyuanyin = "";
-    private String mbi_kongzhishebei = "";
-    private String mbj_leixing = "";
-    private String mbk_shebeifuyazuoye = "";
-    private String mbl_dixielouzujian = "";
-    private String mbm_weiyuzhuangxieliaozhanchuguanqu = "";
-    private String mbn_nianpaifangshijianshaoyu300h = "";
-    private String mbo_zujianbeijueyuan = "";
-    private String mbp_kaikouguanxian = "";
-    private String mbq_kaikouguanxianleixing = "";
-    private String mbr_EMshebeibianma = "";
-    private String mbs_zhuyaojiezhi = "";
-    private String mbt_caozuowendu = "";
-    private String mbu_caozuoyali = "";
-    private String mbv_mifengcaizhi = "";
+    private String mbd_miaoshuren = "";
+    private String mbe_nanyichuji = "";
+    private String mbf_nanyujiance = "";
+    private String mbg_nanyujianceyuanyin = "";
+    private String mbh_xianyujiance = "";
+    private String mbi_xianyujianceyuanyin = "";
+    private String mbj_kongzhishebei = "";
+    private String mbk_leixing = "";
+    private String mbl_shebeifuyazuoye = "";
+    private String mbm_dixielouzujian = "";
+    private String mbn_weiyuzhuangxieliaozhanchuguanqu = "";
+    private String mbo_nianpaifangshijianshaoyu300h = "";
+    private String mbp_zujianbeijueyuan = "";
+    private String mbq_kaikouguanxian = "";
+    private String mbr_kaikouguanxianleixing = "";
+    private String mbs_EMshebeibianma = "";
+    private String mbt_zhuyaojiezhi = "";
+    private String mbu_caozuowendu = "";
+    private String mbv_caozuoyali = "";
+    private String mbw_mifengcaizhi = "";
 
     public void setAa_weizhi1(String aa_weizhi1) {
         maa_weizhi1 = aa_weizhi1;
@@ -286,156 +287,164 @@ public class Hand extends ParserTarget implements Serializable{
         return mbc_tianjiariqi;
     }
 
-    public void setBd_nanyichuji(String bd_nanyichuji) {
-        mbd_nanyichuji = bd_nanyichuji;
+    public void setBd_miaoshuren(String bd_miaoshuren) {
+        mbd_miaoshuren = bd_miaoshuren;
     }
 
-    public String get_Bd_nanyichuji() {
-        return mbd_nanyichuji;
+    public String get_Bd_miaoshuren() {
+        return mbd_miaoshuren;
     }
 
-    public void setBe_nanyujiance(String be_nanyujiance) {
-        mbe_nanyujiance = be_nanyujiance;
+    public void setBe_nanyichuji(String be_nanyichuji) {
+        mbe_nanyichuji = be_nanyichuji;
     }
 
-    public String get_Be_nanyujiance() {
-        return mbe_nanyujiance;
+    public String get_Be_nanyichuji() {
+        return mbe_nanyichuji;
     }
 
-    public void setBf_nanyujianceyuanyin(String bf_nanyujianceyuanyin) {
-        mbf_nanyujianceyuanyin = bf_nanyujianceyuanyin;
+    public void setBf_nanyujiance(String bf_nanyujiance) {
+        mbf_nanyujiance = bf_nanyujiance;
     }
 
-    public String get_Bf_nanyujianceyuanyin() {
-        return mbf_nanyujianceyuanyin;
+    public String get_Bf_nanyujiance() {
+        return mbf_nanyujiance;
     }
 
-    public void setBg_xianyujiance(String bg_xianyujiance) {
-        mbg_xianyujiance = bg_xianyujiance;
+    public void setBg_nanyujianceyuanyin(String bg_nanyujianceyuanyin) {
+        mbg_nanyujianceyuanyin = bg_nanyujianceyuanyin;
     }
 
-    public String get_Bg_xianyujiance() {
-        return mbg_xianyujiance;
+    public String get_Bg_nanyujianceyuanyin() {
+        return mbg_nanyujianceyuanyin;
     }
 
-    public void setBh_xianyujianceyuanyin(String bh_xianyujianceyuanyin) {
-        mbh_xianyujianceyuanyin = bh_xianyujianceyuanyin;
+    public void setBh_xianyujiance(String bh_xianyujiance) {
+        mbh_xianyujiance = bh_xianyujiance;
     }
 
-    public String get_Bh_xianyujianceyuanyin() {
-        return mbh_xianyujianceyuanyin;
+    public String get_Bh_xianyujiance() {
+        return mbh_xianyujiance;
     }
 
-    public void setBi_kongzhishebei(String bi_kongzhishebei) {
-        mbi_kongzhishebei = bi_kongzhishebei;
+    public void setBi_xianyujianceyuanyin(String bi_xianyujianceyuanyin) {
+        mbi_xianyujianceyuanyin = bi_xianyujianceyuanyin;
     }
 
-    public String get_Bi_kongzhishebei() {
-        return mbi_kongzhishebei;
+    public String get_Bi_xianyujianceyuanyin() {
+        return mbi_xianyujianceyuanyin;
     }
 
-    public void setBj_leixing(String bj_leixing) {
-        mbj_leixing = bj_leixing;
+    public void setBj_kongzhishebei(String bj_kongzhishebei) {
+        mbj_kongzhishebei = bj_kongzhishebei;
     }
 
-    public String get_Bj_leixing() {
-        return mbj_leixing;
+    public String get_Bj_kongzhishebei() {
+        return mbj_kongzhishebei;
     }
 
-    public void setBk_shebeifuyazuoye(String bk_shebeifuyazuoye) {
-        mbk_shebeifuyazuoye = bk_shebeifuyazuoye;
+    public void setBk_leixing(String bk_leixing) {
+        mbk_leixing = bk_leixing;
     }
 
-    public String get_Bk_shebeifuyazuoye() {
-        return mbk_shebeifuyazuoye;
+    public String get_Bk_leixing() {
+        return mbk_leixing;
     }
 
-    public void setBl_dixielouzujian(String bl_dixielouzujian) {
-        mbl_dixielouzujian = bl_dixielouzujian;
+    public void setBl_shebeifuyazuoye(String bl_shebeifuyazuoye) {
+        mbl_shebeifuyazuoye = bl_shebeifuyazuoye;
     }
 
-    public String get_Bl_dixielouzujian() {
-        return mbl_dixielouzujian;
+    public String get_Bl_shebeifuyazuoye() {
+        return mbl_shebeifuyazuoye;
     }
 
-    public void setBm_weiyuzhuangxieliaozhanchuguanqu(String bm_weiyuzhuangxieliaozhanchuguanqu) {
-        mbm_weiyuzhuangxieliaozhanchuguanqu = bm_weiyuzhuangxieliaozhanchuguanqu;
+    public void setBm_dixielouzujian(String bm_dixielouzujian) {
+        mbm_dixielouzujian = bm_dixielouzujian;
     }
 
-    public String get_Bm_weiyuzhuangxieliaozhanchuguanqu() {
-        return mbm_weiyuzhuangxieliaozhanchuguanqu;
+    public String get_Bm_dixielouzujian() {
+        return mbm_dixielouzujian;
     }
 
-    public void setBn_nianpaifangshijianshaoyu300h(String bn_nianpaifangshijianshaoyu300h) {
-        mbn_nianpaifangshijianshaoyu300h = bn_nianpaifangshijianshaoyu300h;
+    public void setBn_weiyuzhuangxieliaozhanchuguanqu(String bn_weiyuzhuangxieliaozhanchuguanqu) {
+        mbn_weiyuzhuangxieliaozhanchuguanqu = bn_weiyuzhuangxieliaozhanchuguanqu;
     }
 
-    public String get_Bn_nianpaifangshijianshaoyu300h() {
-        return mbn_nianpaifangshijianshaoyu300h;
+    public String get_Bn_weiyuzhuangxieliaozhanchuguanqu() {
+        return mbn_weiyuzhuangxieliaozhanchuguanqu;
     }
 
-    public void setBo_zujianbeijueyuan(String bo_zujianbeijueyuan) {
-        mbo_zujianbeijueyuan = bo_zujianbeijueyuan;
+    public void setBo_nianpaifangshijianshaoyu300h(String bo_nianpaifangshijianshaoyu300h) {
+        mbo_nianpaifangshijianshaoyu300h = bo_nianpaifangshijianshaoyu300h;
     }
 
-    public String get_Bo_zujianbeijueyuan() {
-        return mbo_zujianbeijueyuan;
+    public String get_Bo_nianpaifangshijianshaoyu300h() {
+        return mbo_nianpaifangshijianshaoyu300h;
     }
 
-    public void setBp_kaikouguanxian(String bp_kaikouguanxian) {
-        mbp_kaikouguanxian = bp_kaikouguanxian;
+    public void setBp_zujianbeijueyuan(String bp_zujianbeijueyuan) {
+        mbp_zujianbeijueyuan = bp_zujianbeijueyuan;
     }
 
-    public String get_Bp_kaikouguanxian() {
-        return mbp_kaikouguanxian;
+    public String get_Bp_zujianbeijueyuan() {
+        return mbp_zujianbeijueyuan;
     }
 
-    public void setBq_kaikouguanxianleixing(String bq_kaikouguanxianleixing) {
-        mbq_kaikouguanxianleixing = bq_kaikouguanxianleixing;
+    public void setBq_kaikouguanxian(String bq_kaikouguanxian) {
+        mbq_kaikouguanxian = bq_kaikouguanxian;
     }
 
-    public String get_Bq_kaikouguanxianleixing() {
-        return mbq_kaikouguanxianleixing;
+    public String get_Bq_kaikouguanxian() {
+        return mbq_kaikouguanxian;
     }
 
-    public void setBr_EMshebeibianma(String br_EMshebeibianma) {
-        mbr_EMshebeibianma = br_EMshebeibianma;
+    public void setBr_kaikouguanxianleixing(String br_kaikouguanxianleixing) {
+        mbr_kaikouguanxianleixing = br_kaikouguanxianleixing;
     }
 
-    public String get_Br_EMshebeibianma() {
-        return mbr_EMshebeibianma;
+    public String get_Br_kaikouguanxianleixing() {
+        return mbr_kaikouguanxianleixing;
     }
 
-    public void setBs_zhuyaojiezhi(String bs_zhuyaojiezhi) {
-        mbs_zhuyaojiezhi = bs_zhuyaojiezhi;
+    public void setBs_EMshebeibianma(String bs_EMshebeibianma) {
+        mbs_EMshebeibianma = bs_EMshebeibianma;
     }
 
-    public String get_Bs_zhuyaojiezhi() {
-        return mbs_zhuyaojiezhi;
+    public String get_Bs_EMshebeibianma() {
+        return mbs_EMshebeibianma;
     }
 
-    public void setBt_caozuowendu(String bt_caozuowendu) {
-        mbt_caozuowendu = bt_caozuowendu;
+    public void setBt_zhuyaojiezhi(String bt_zhuyaojiezhi) {
+        mbt_zhuyaojiezhi = bt_zhuyaojiezhi;
     }
 
-    public String get_Bt_caozuowendu() {
-        return mbt_caozuowendu;
+    public String get_Bt_zhuyaojiezhi() {
+        return mbt_zhuyaojiezhi;
     }
 
-    public void setBu_caozuoyali(String bu_caozuoyali) {
-        mbu_caozuoyali = bu_caozuoyali;
+    public void setBu_caozuowendu(String bu_caozuowendu) {
+        mbu_caozuowendu = bu_caozuowendu;
     }
 
-    public String get_Bu_caozuoyali() {
-        return mbu_caozuoyali;
+    public String get_Bu_caozuowendu() {
+        return mbu_caozuowendu;
     }
 
-    public void setBv_mifengcaizhi(String bv_mifengcaizhi) {
-        mbv_mifengcaizhi = bv_mifengcaizhi;
+    public void setBv_caozuoyali(String bv_caozuoyali) {
+        mbv_caozuoyali = bv_caozuoyali;
     }
 
-    public String get_Bv_mifengcaizhi() {
-        return mbv_mifengcaizhi;
+    public String get_Bv_caozuoyali() {
+        return mbv_caozuoyali;
+    }
+
+    public void setBw_mifengcaizhi(String bw_mifengcaizhi) {
+        mbw_mifengcaizhi = bw_mifengcaizhi;
+    }
+
+    public String get_Bw_mifengcaizhi() {
+        return mbw_mifengcaizhi;
     }
 
     @Override

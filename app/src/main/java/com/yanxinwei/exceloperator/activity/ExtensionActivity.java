@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -119,7 +120,9 @@ public class ExtensionActivity extends AppCompatActivity {
         final View view = LayoutInflater.from(this).inflate(R.layout.item_extension, null);
         EditText edtCount = (EditText) view.findViewById(R.id.edt_count);
         final EditText edtSymbol = (EditText) view.findViewById(R.id.edt_symbol);
-        EditText edtSize = (EditText) view.findViewById(R.id.edt_size);
+        edtSymbol.setFocusable(false);
+        final EditText edtSize = (EditText) view.findViewById(R.id.edt_size);
+        edtSize.setFocusable(false);
         ImageButton btnCancel = (ImageButton) view.findViewById(R.id.btn_cancel);
 
         edtCount.setText(extension.getCount() + "");
@@ -150,23 +153,10 @@ public class ExtensionActivity extends AppCompatActivity {
             }
         });
         edtSize.setText(extension.getSize() + "");
-        edtSize.addTextChangedListener(new TextWatcher() {
+        edtSize.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
-                    int size = Integer.parseInt(s.toString());
-                    extension.setSize(size);
-                }
+            public void onClick(View v) {
+                showSizeDialog(edtSize, extension);
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +181,17 @@ public class ExtensionActivity extends AppCompatActivity {
                         extension.setSymbol(data);
                     }
                 });
+    }
+
+    private void showSizeDialog(final EditText editText, final Extension extension) {
+        DialogUtils.showDialogListAndInput(AppConstants.ALL_SIZE, "请选择尺寸", this, InputType.TYPE_CLASS_NUMBER,
+                new DialogUtils.DialogListOnItem() {
+            @Override
+            public void onItem(String data) {
+                editText.setText(data);
+                extension.setSize(Integer.parseInt(data));
+            }
+        });
     }
 
 }

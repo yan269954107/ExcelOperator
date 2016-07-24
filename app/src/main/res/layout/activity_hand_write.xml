@@ -24,14 +24,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:pb_text="@string/equipment"/>
+            app:pb_text="@string/equipment"
+            android:inputType="text"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
             android:id="@+id/pb_area"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:pb_text="@string/area"/>
+            app:pb_text="@string/area"
+            android:inputType="text"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
             android:id="@+id/pb_tag_number"
@@ -39,7 +41,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:pb_text="@string/tag_number"
-            app:pb_focusable="false"/>
+            android:inputType="number"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
             android:id="@+id/pb_extension_number"
@@ -62,7 +64,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:pb_text="@string/pic_number"/>
+            app:pb_text="@string/pic_number"
+            android:inputType="text"/>
 
     </LinearLayout>
 
@@ -77,7 +80,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:pb_text="@string/main_reference"/>
+            app:pb_text="@string/main_reference"
+            android:inputType="text"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
             android:id="@+id/pb_orientation"
@@ -141,7 +145,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             app:pb_text="@string/size"
-            android:inputType="number"/>
+            app:pb_focusable="false"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock
             android:id="@+id/pb_extra_des"
