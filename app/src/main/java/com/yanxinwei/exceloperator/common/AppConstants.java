@@ -177,4 +177,6 @@ public interface AppConstants {
             "300", "350", "400", "500", "600", "800", "1000"};
 
     String SHAREPRE_USER_NAME = "userName";
+
+    String[] EXTENSION_COUNT = {"1", "2", "3", "4"};
 }

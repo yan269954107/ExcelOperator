@@ -472,6 +472,7 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
     private void fillData() {
         mHandVo.setWeizhi1(mPbEquipment.getValue());
         mHandVo.setWeizhi3(mPbArea.getValue());
+        mHandVo.setBiaoqian(mPbTagNumber.getValue());
         mHandVo.setChanpinliu(Integer.parseInt(mPbFlagNumber.getValue()));
         mHandVo.setTuhao(mPbPicNumber.getValue());
         mHandVo.setZhuyaocankaowu(mPbMainReference.getValue());

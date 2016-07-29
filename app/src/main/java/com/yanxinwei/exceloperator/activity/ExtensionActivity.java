@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -118,7 +116,8 @@ public class ExtensionActivity extends AppCompatActivity {
 
     private void createExtension(final Extension extension) {
         final View view = LayoutInflater.from(this).inflate(R.layout.item_extension, null);
-        EditText edtCount = (EditText) view.findViewById(R.id.edt_count);
+        final EditText edtCount = (EditText) view.findViewById(R.id.edt_count);
+        edtCount.setFocusable(false);
         final EditText edtSymbol = (EditText) view.findViewById(R.id.edt_symbol);
         edtSymbol.setFocusable(false);
         final EditText edtSize = (EditText) view.findViewById(R.id.edt_size);
@@ -126,23 +125,10 @@ public class ExtensionActivity extends AppCompatActivity {
         ImageButton btnCancel = (ImageButton) view.findViewById(R.id.btn_cancel);
 
         edtCount.setText(extension.getCount() + "");
-        edtCount.addTextChangedListener(new TextWatcher() {
+        edtCount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
-                    int count = Integer.parseInt(s.toString());
-                    extension.setCount(count);
-                }
+            public void onClick(View v) {
+                showCountDialog(edtCount, extension);
             }
         });
         edtSymbol.setText(extension.getSymbol());
@@ -192,6 +178,17 @@ public class ExtensionActivity extends AppCompatActivity {
                 extension.setSize(Integer.parseInt(data));
             }
         });
+    }
+
+    private void showCountDialog(final EditText editText, final Extension extension) {
+        DialogUtils.showDialogListAndInput(AppConstants.EXTENSION_COUNT, "请选择个数", this,
+                InputType.TYPE_CLASS_NUMBER, new DialogUtils.DialogListOnItem() {
+                    @Override
+                    public void onItem(String data) {
+                        editText.setText(data);
+                        extension.setCount(Integer.parseInt(data));
+                    }
+                });
     }
 
 }
