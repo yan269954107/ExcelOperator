@@ -19,7 +19,7 @@ public class Hand extends ParserTarget implements Serializable{
     private String mal_fangxiang = "";
     private String mam_juli = "";
     private String man_danwei = "";
-    private int mao_louceng;
+    private double mao_louceng;
     private double map_gaodu;
     private String maq_danwei = "";
     private String mar_fujiamiaoshu = "";
@@ -167,11 +167,11 @@ public class Hand extends ParserTarget implements Serializable{
         return man_danwei;
     }
 
-    public void setAo_louceng(int ao_louceng) {
+    public void setAo_louceng(double ao_louceng) {
         mao_louceng = ao_louceng;
     }
 
-    public int get_Ao_louceng() {
+    public double get_Ao_louceng() {
         return mao_louceng;
     }
 

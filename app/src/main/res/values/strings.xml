@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExcelOperator</string>
+    <string name="app_name">VOCs Ledge</string>
     <string name="file_list">文件列表</string>
     <string name="empty_file_hint">请导入需要检测的excel文件至sdcard/Target目录</string>
     <string name="empty_target_hint">该文件未有需要检测的数据</string>

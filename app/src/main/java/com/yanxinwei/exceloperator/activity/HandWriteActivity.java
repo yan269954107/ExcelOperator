@@ -128,9 +128,13 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
         mPbPicNumber.setValue(mHandVo.getTuhao());
         mPbMainReference.setValue(mHandVo.getZhuyaocankaowu());
         mPbOrientation.setValue(mHandVo.getFangxiang());
-        mPbDistance.setValue(mHandVo.getJuli() + "");
+        if (mHandVo.getJuli() != -1) {
+            mPbDistance.setValue(mHandVo.getJuli() + "");
+        }
         mPbFloor.setValue(mHandVo.getLouceng() + "");
-        mPbHeight.setValue(mHandVo.getGaodu() + "");
+        if (mHandVo.getGaodu() != -1) {
+            mPbHeight.setValue(mHandVo.getGaodu() + "");
+        }
         mPbUnitType.setValue(mHandVo.getZujianleixing());
         mPbUnitSubType.setValue(mHandVo.getZujianzileixing());
         mPbSize.setValue(mHandVo.getChicun() + "");
@@ -153,6 +157,7 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
         mPbExtraDes.setOnClickListener(this);
         mPbHigh.setOnClickListener(this);
         mPbSize.setOnClickListener(this);
+        mPbFloor.setOnClickListener(this);
 
 
         mPbHeight.setTextWatcher(new MyTextWatcher() {
@@ -225,7 +230,20 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
             case R.id.pb_size:
                 selectSize();
                 break;
+            case R.id.pb_floor:
+                selectFloors();
+                break;
         }
+    }
+
+    private void selectFloors() {
+        DialogUtils.showDialogListAndInput(AppConstants.FLOORS, "请选择楼层", this,
+                InputType.TYPE_CLASS_NUMBER, new DialogUtils.DialogListOnItem() {
+                    @Override
+                    public void onItem(String data) {
+                        mPbFloor.setValue(data);
+                    }
+                });
     }
 
     private void selectSize() {
@@ -429,6 +447,14 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
             T.showShort(this, "组件子类型不能为空,请选择");
             return;
         }
+        if (TextUtils.isEmpty(mPbDistance.getValue())) {
+            T.showShort(this, "距离不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mPbHeight.getValue())) {
+            T.showShort(this, "高度不能为空");
+            return;
+        }
         showDialog("正在保存任务");
         fillData();
         if (mOldExtensions.size() > 0) {
@@ -478,7 +504,7 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
         mHandVo.setZhuyaocankaowu(mPbMainReference.getValue());
         mHandVo.setFangxiang(mPbOrientation.getValue());
         mHandVo.setJuli(Double.parseDouble(mPbDistance.getValue()));
-        mHandVo.setLouceng(Integer.parseInt(mPbFloor.getValue()));
+        mHandVo.setLouceng(Double.parseDouble(mPbFloor.getValue()));
         mHandVo.setGaodu(Double.parseDouble(mPbHeight.getValue()));
         mHandVo.setZujianleixing(mPbUnitType.getValue());
         mHandVo.setZujianzileixing(mPbUnitSubType.getValue());

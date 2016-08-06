@@ -1,5 +1,7 @@
 package com.generator.excelparser;
 
+import android.text.TextUtils;
+
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -67,11 +69,21 @@ public class ExcelUtils {
     }
 
     public static int convertCellValueToInt(Cell cell) {
-        return (int) Double.valueOf(convertCellValueToString(cell)).doubleValue();
+        String value = convertCellValueToString(cell);
+        if (TextUtils.isEmpty(value)) {
+            return 0;
+        } else {
+            return (int) Double.valueOf(convertCellValueToString(cell)).doubleValue();
+        }
     }
 
     public static Double convertCellValueToDouble(Cell cell) {
-        return Double.valueOf(convertCellValueToString(cell));
+        String value = convertCellValueToString(cell);
+        if (TextUtils.isEmpty(value)) {
+            return 0.0;
+        } else {
+            return Double.valueOf(convertCellValueToString(cell));
+        }
     }
 
     public static void convertCellValue(Cell cell, Class clazz, Method method, Object obj) throws InvocationTargetException, IllegalAccessException {

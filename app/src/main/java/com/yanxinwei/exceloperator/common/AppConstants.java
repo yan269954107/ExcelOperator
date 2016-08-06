@@ -21,11 +21,11 @@ public interface AppConstants {
     String[] YES_OR_NO_VO = {"是", "否"};
     String[] YES_OR_NO = {"是", ""};
 
-    String[] SUB_UNIT_FAMEN = {"闸阀", "针阀", "球阀", "蝶阀", "止回阀", "截止阀", "控制阀", "减压阀"};
+    String[] SUB_UNIT_FAMEN = {"闸阀", "针阀", "球阀", "蝶阀", "截止阀", "控制阀"};
     String[] SUB_UNIT_FALA = {"法兰"};
     String[] SUB_UNIT_LIANJIEJIAN = {"丝扣连接", "活接", "管帽", "丝堵", "空冷丝堵"};
     String[] SUB_UNIT_KAIKOUGUANXIAN = {"开口管线"};
-    String[] SUB_UNIT_BENG = {"离心泵", "往复泵", "螺杆泵", "真快泵"};
+    String[] SUB_UNIT_BENG = {"离心泵", "往复泵", "螺杆泵", "真空泵"};
     String[] SUB_UNIT_JIAOBANQI = {"搅拌器"};
     String[] SUB_UNIT_YASUOJI = {"离心式压缩机", "往复式压缩机", "螺杆式压缩机"};
     String[] SUB_UNIT_XIEYAZHUANGZHI = {"安全阀"};
@@ -179,4 +179,6 @@ public interface AppConstants {
     String SHAREPRE_USER_NAME = "userName";
 
     String[] EXTENSION_COUNT = {"1", "2", "3", "4"};
+
+    String[] FLOORS = {"1", "1.5", "2", "2.5", "3", "3.5", "4"};
 }

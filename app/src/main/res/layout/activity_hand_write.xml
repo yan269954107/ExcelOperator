@@ -105,6 +105,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.25"
             app:pb_text="@string/floor"
+            app:pb_focusable="false"
             android:inputType="number"/>
 
         <com.yanxinwei.exceloperator.widget.ParamsBlock

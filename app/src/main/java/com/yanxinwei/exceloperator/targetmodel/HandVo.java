@@ -16,10 +16,10 @@ public class HandVo implements Serializable, Cloneable{
     private String tuhao = "";
     private String zhuyaocankaowu = "";
     private String fangxiang = "";
-    private double juli;
+    private double juli = -1;
     private String danwei1 = "";
-    private int louceng;
-    private double gaodu;
+    private double louceng;
+    private double gaodu = -1;
     private String danwei2 = "";
     private String fujiamiaoshu = "";
     private String zujianleixing = "";
@@ -103,11 +103,11 @@ public class HandVo implements Serializable, Cloneable{
         this.juli = juli;
     }
 
-    public int getLouceng() {
+    public double getLouceng() {
         return louceng;
     }
 
-    public void setLouceng(int louceng) {
+    public void setLouceng(double louceng) {
         this.louceng = louceng;
     }
 
