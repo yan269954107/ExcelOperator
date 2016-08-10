@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yanxinwei.exceloperator.R;
 import com.yanxinwei.exceloperator.common.AppConstants;
@@ -30,14 +31,18 @@ public class ExtensionActivity extends AppCompatActivity {
 
     private String mExtensions;
     private int mSize;
+    private boolean isKonglengsidu;  //是否是
+    private int maxRow = 0;
 
     private LinearLayout mLlContainer;
     private ArrayList<Extension> mExtensionList;
 
-    public static void startActivity(Activity context, String extension, int size, int requestCode) {
+    public static void startActivity(Activity context, String extension, int size, int requestCode,
+                                     boolean isKongLengSidu) {
         Intent intent = new Intent(context, ExtensionActivity.class);
         intent.putExtra("extension", extension);
         intent.putExtra("size", size);
+        intent.putExtra("isKonglengsidu", isKongLengSidu);
         context.startActivityForResult(intent, requestCode);
     }
 
@@ -53,6 +58,7 @@ public class ExtensionActivity extends AppCompatActivity {
 
         mExtensions = getIntent().getStringExtra("extension");
         mSize = getIntent().getIntExtra("size", 0);
+        isKonglengsidu = getIntent().getBooleanExtra("isKonglengsidu", false);
 
         mLlContainer = (LinearLayout) findViewById(R.id.ll_container);
 
@@ -89,8 +95,13 @@ public class ExtensionActivity extends AppCompatActivity {
             case ADD_ID:
                 Extension extension = new Extension();
                 extension.setSize(mSize);
-                extension.setSymbol("");
+                if (isKonglengsidu) {
+                    extension.setSymbol("KP");
+                } else {
+                    extension.setSymbol("");
+                }
                 extension.setCount(1);
+                extension.setRow(++maxRow);
                 createExtension(extension);
                 return true;
             case android.R.id.home:
@@ -110,6 +121,9 @@ public class ExtensionActivity extends AppCompatActivity {
             for (String ex : extensions) {
                 final Extension extension = Mapper.parseExtension(ex, mSize);
                 createExtension(extension);
+                if (extension.getRow() > maxRow) {
+                    maxRow = extension.getRow();
+                }
             }
         }
     }
@@ -123,6 +137,11 @@ public class ExtensionActivity extends AppCompatActivity {
         final EditText edtSize = (EditText) view.findViewById(R.id.edt_size);
         edtSize.setFocusable(false);
         ImageButton btnCancel = (ImageButton) view.findViewById(R.id.btn_cancel);
+        TextView txtRow = (TextView) view.findViewById(R.id.txt_row);
+        if (isKonglengsidu) {
+            txtRow.setVisibility(View.VISIBLE);
+            txtRow.setText(getString(R.string.row_des, extension.getRow()));
+        }
 
         edtCount.setText(extension.getCount() + "");
         edtCount.setOnClickListener(new View.OnClickListener() {

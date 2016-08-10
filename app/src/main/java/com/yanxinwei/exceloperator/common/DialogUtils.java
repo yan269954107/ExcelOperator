@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yanxinwei.exceloperator.R;
+import com.yanxinwei.exceloperator.targetmodel.model.ExtraDes;
 
 /**
  * Created by yanxinwei on 16/7/11.
@@ -107,6 +108,54 @@ public class DialogUtils {
                 }
             }
         });
+    }
+
+    public static void showDialogExtrasAndInput(final ExtraDes extraDes, final String title, final Context context,
+                                                final int inputType, final DialogListOnItem listener) {
+        final String[] datas = extraDes.getDatas();
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        View convertView = LayoutInflater.from(context).inflate(R.layout.dialog_list_input_view, null);
+        dialogBuilder.setView(convertView);
+        dialogBuilder.setTitle(title);
+        ListView lv = (ListView) convertView.findViewById(R.id.listView);
+        TextView txtEmpty = (TextView) convertView.findViewById(R.id.txt_empty);
+        lv.setEmptyView(txtEmpty);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, datas);
+        lv.setAdapter(adapter);
+        final AlertDialog dialog = dialogBuilder.show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                    ExtraDes selectedExtraDes = extraDes.getExtras().get(position);
+                    if (selectedExtraDes.isHasNext()) {
+                        showDialogExtrasAndInput(selectedExtraDes, title, context, inputType, listener);
+                    } else {
+                        String data = datas[position];
+                        listener.onItem(data);
+                    }
+                }
+            }
+        });
+        Button btnConfirm = (Button) convertView.findViewById(R.id.btn_confirm);
+        final EditText edtContent = (EditText) convertView.findViewById(R.id.edt_content);
+        edtContent.setInputType(inputType);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = edtContent.getText().toString();
+                if (TextUtils.isEmpty(content)) {
+                    T.showShort(context, "手写内容不能为空");
+                } else {
+                    if (dialog != null) {
+                        dialog.dismiss();
+                        listener.onItem(content);
+                    }
+                }
+            }
+        });
+
     }
 
     public static void showInputDialog(final Context context, String title, String inputContent,

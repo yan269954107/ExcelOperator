@@ -15,6 +15,7 @@ public interface AppConstants {
 
     String SD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
     String TARGETS_PATH = SD_PATH.concat("/Targets");
+    String EXTRAS_PATH = SD_PATH.concat("/extras.json");
 
     String[] ORIENTATION = {"东", "西", "南", "北", "东南", "西南", "东北", "西北", "顶部", "底部", "上方", "下方"};
 

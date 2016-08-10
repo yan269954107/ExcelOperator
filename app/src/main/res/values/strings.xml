@@ -38,4 +38,6 @@
 
     <string name="hand_write_hint">请在这里手写输入</string>
     <string name="extra_empty_hint">没有对应的附加描述可供选择</string>
+
+    <string name="row_des">第%d行</string>
 </resources>

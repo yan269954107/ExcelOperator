@@ -1,11 +1,21 @@
 package com.yanxinwei.exceloperator.common;
 
+import android.content.Context;
+
+import com.yanxinwei.exceloperator.targetmodel.model.ExtraDes;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Created by yanxinwei on 16/7/15.
  */
 public class Utils {
 
     private static final int LABEL_LENGTH = 4;
+
+    private static ExtraDes sExtraDes;
 
     public static String[] getExtraDes(String extra) {
         int length = extra.length();
@@ -43,6 +53,24 @@ public class Utils {
             }
         }
         return extra.substring(0, splitIndex);
+    }
+
+    public static synchronized ExtraDes getExtraDes(Context context) {
+        if (sExtraDes == null) {
+            try {
+                StringBuilder sb = new StringBuilder();
+                BufferedReader bf = new BufferedReader(new FileReader(AppConstants.EXTRAS_PATH));
+                String line;
+                while ((line = bf.readLine()) != null) {
+                    sb.append(line);
+                }
+                bf.close();
+                sExtraDes = GsonUtil.jsonToBean(sb.toString(), ExtraDes.class);
+            } catch (IOException e) {
+                T.showShort(context, "加载附加描述失败,请检查在sd卡根目录是否存在extras.json文件");
+            }
+        }
+        return sExtraDes;
     }
 
 }

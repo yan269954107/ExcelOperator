@@ -37,13 +37,13 @@ public class Mapper {
                     majorHandVo.setKuozhan(getExtension(majorHandVo, extensions));
                 }
                 tag = hand.get_Ad_biaoqian();
-                majorHandVo = transformToVo(hand);
+                majorHandVo = transformToVo(hand, true);
                 handVos.add(majorHandVo);
                 extensions = new ArrayList<>();
             }
             //标签号相等,为扩展
             else {
-                HandVo handVo = transformToVo(hand);
+                HandVo handVo = transformToVo(hand, false);
                 extensions.add(handVo);
             }
         }
@@ -58,30 +58,39 @@ public class Mapper {
         String symbol = "init";
         int count = 1;
         int size = 0;
+        int konglengsiduRow = -1;
         for (HandVo handVo : extensions) {
             if (symbol.equals(AppConstants.EXTENSION_SYMBOL.get(handVo.getZujianzileixing()))
-                    && handVo.getChicun() == size) {
+                    && handVo.getChicun() == size && handVo.getKonglengsiduRow() == konglengsiduRow) {
                 count++;
             } else {
                 if (!symbol.equals("init")) {
-                    sb.append(getSingleExtension(count, symbol, size, size == major.getChicun()));
+                    sb.append(getSingleExtension(konglengsiduRow, count, symbol, size, size == major.getChicun()));
                     sb.append("+");
                 }
                 count = 1;
                 symbol = AppConstants.EXTENSION_SYMBOL.get(handVo.getZujianzileixing());
                 size = handVo.getChicun();
+                konglengsiduRow = handVo.getKonglengsiduRow();
             }
         }
-        sb.append(getSingleExtension(count, symbol, size, size == major.getChicun()));
+        sb.append(getSingleExtension(konglengsiduRow, count, symbol, size, size == major.getChicun()));
         return sb.toString();
     }
 
-    private static String getSingleExtension(int count, String symbol, int size, boolean isEqual) {
-        if (count == 1) {
-            return getExtensionBySize(symbol, size, isEqual);
-        } else {
-            return getExtensionBySize(count + symbol, size, isEqual);
+    private static String getSingleExtension(int konglengsiduRow, int count, String symbol, int size, boolean isEqual) {
+        StringBuilder sb = new StringBuilder();
+        if (konglengsiduRow != -1) {
+            sb.append("第");
+            sb.append(konglengsiduRow);
+            sb.append("行");
         }
+        if (count == 1) {
+            sb.append(getExtensionBySize(symbol, size, isEqual));
+        } else {
+            sb.append(getExtensionBySize(count + symbol, size, isEqual));
+        }
+        return sb.toString();
     }
 
     private static String getExtensionBySize(String extension, int size, boolean isEqual) {
@@ -92,13 +101,17 @@ public class Mapper {
         }
     }
 
-    public static HandVo transformToVo(Hand hand) {
+    public static HandVo transformToVo(Hand hand, boolean isMajor) {
         HandVo handVo = new HandVo();
         handVo.setBiaoqian(hand.get_Ad_biaoqian());
         handVo.setChanpinliu(hand.get_Aw_chanpinliu());
         handVo.setChicun(hand.get_Au_chicun());
         handVo.setExtensions(null);
         handVo.setFangxiang(hand.get_Ah_fangxiang());
+        if (!isMajor) {
+            String extra = hand.get_Ar_fujiamiaoshu();
+            handVo.setKonglengsiduRow(getExtrasRow(extra));
+        }
         handVo.setFujiamiaoshu(hand.get_Ar_fujiamiaoshu());
         handVo.setGaodu(hand.get_Ap_gaodu());
         handVo.setJiezhizhuangtai(hand.get_Av_jiezhizhuangtai());
@@ -121,13 +134,15 @@ public class Mapper {
         return handVo;
     }
 
+//    public static int get
+
     public static Hand transformToModel(HandVo handVo) {
         Hand hand = new Hand();
         hand.setAd_biaoqian(handVo.getBiaoqian());
         hand.setAw_chanpinliu(handVo.getChanpinliu());
         hand.setAu_chicun(handVo.getChicun());
         hand.setAh_fangxiang(handVo.getFangxiang());
-        hand.setAr_fujiamiaoshu(handVo.getFujiamiaoshu());
+        hand.setAr_fujiamiaoshu(getFullExtras(handVo.getFujiamiaoshu(), handVo.getKonglengsiduRow()));
         hand.setAp_gaodu(handVo.getGaodu());
         hand.setAv_jiezhizhuangtai(handVo.getJiezhizhuangtai());
         hand.setAi_juli(handVo.getJuli());
@@ -154,6 +169,42 @@ public class Mapper {
         return hand;
     }
 
+    private static String getFullExtras(String extra, int row) {
+        if (row != -1) {
+            StringBuilder sb = new StringBuilder(extra);
+            sb.append("第");
+            sb.append(row);
+            sb.append("行");
+            return sb.toString();
+        } else {
+            return extra;
+        }
+    }
+
+    private static int getExtrasRow(String fujiamiaoshu) {
+
+        int start = -1;
+        int end = -1;
+        for (int i = 0; i < fujiamiaoshu.length(); i++) {
+            if (fujiamiaoshu.charAt(i) == '第') {
+                start = i;
+                continue;
+            }
+            if (fujiamiaoshu.charAt(i) == '行') {
+                end = i;
+            }
+        }
+        if (start != -1 && end != -1) {
+            String sRow = fujiamiaoshu.substring(start + 1, end);
+            try {
+                return Integer.parseInt(sRow);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  -1;
+    }
+
     public static List<ParserTarget> transformToModelList(List<HandVo> handVos) {
         List<ParserTarget> hands = new ArrayList<>();
         for (HandVo handVo : handVos) {
@@ -164,9 +215,26 @@ public class Mapper {
     }
 
     public static Extension parseExtension(String strExtension, int majorSize) {
+        Extension extension = new Extension();
+        int length = strExtension.length();
+        int rowEndIndex = -1;
+        if (strExtension.charAt(0) == '第') {
+            for (int i = 1; i < length; i++) {
+                if (strExtension.charAt(i) == '行') {
+                    rowEndIndex = i;
+                }
+            }
+        }
+        if (rowEndIndex != -1) {
+            String sRow = strExtension.substring(1, rowEndIndex);
+            int row = Integer.parseInt(sRow);
+            extension.setRow(row);
+            strExtension = strExtension.substring(rowEndIndex + 1);
+        }
+
         int countIndex = -1;
         int symbolEndIndex = -1;
-        int length = strExtension.length();
+        length = strExtension.length();
         for (int i = 0; i < length; i++) {
             if (strExtension.charAt(i) >= 'A' && strExtension.charAt(i) <= 'Z' && countIndex == -1) {
                 countIndex = i;
@@ -179,7 +247,7 @@ public class Mapper {
         if (symbolEndIndex == -1) {
             symbolEndIndex = length;
         }
-        Extension extension = new Extension();
+
         if (countIndex == 0) {
             extension.setCount(1);
         } else {
@@ -206,6 +274,7 @@ public class Mapper {
                 UnitInfo unitInfo = AppConstants.UNIT_TYPE_MATCH_SYMBOL.get(extension.getSymbol());
                 handVo.setZujianleixing(unitInfo.getUnitType());
                 handVo.setZujianzileixing(unitInfo.getUnitSubType());
+                handVo.setKonglengsiduRow(extension.getRow());
                 index++;
                 handVo.addRow(index);
                 handVo.setKuozhanhao(getExtensionNumber(index));

@@ -23,6 +23,7 @@ import com.yanxinwei.exceloperator.targetmodel.Extension;
 import com.yanxinwei.exceloperator.targetmodel.Hand;
 import com.yanxinwei.exceloperator.targetmodel.HandVo;
 import com.yanxinwei.exceloperator.targetmodel.Mapper;
+import com.yanxinwei.exceloperator.targetmodel.model.ExtraDes;
 import com.yanxinwei.exceloperator.widget.ParamsBlock;
 
 import java.util.ArrayList;
@@ -257,20 +258,23 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void selectExtraDes() {
-        String prefix = Utils.getExtraPrefix(mPbArea.getValue());
-        if (UNIT_VALVE.equals(mPbUnitType.getValue())) {
-            prefix = prefix + "f";
+//        String prefix = Utils.getExtraPrefix(mPbArea.getValue());
+//        if (UNIT_VALVE.equals(mPbUnitType.getValue())) {
+//            prefix = prefix + "f";
+//        }
+//        String[] data = AppConstants.EXTRA_DES.get(prefix);
+//        if (null == data) {
+//            data = new String[0];
+//        }
+        ExtraDes extraDes = Utils.getExtraDes(this);
+        if (extraDes != null) {
+            DialogUtils.showDialogExtrasAndInput(extraDes, "请选择附加描述", this, InputType.TYPE_CLASS_TEXT, new DialogUtils.DialogListOnItem() {
+                @Override
+                public void onItem(String data) {
+                    mPbExtraDes.setValue(data);
+                }
+            });
         }
-        String[] data = AppConstants.EXTRA_DES.get(prefix);
-        if (null == data) {
-            data = new String[0];
-        }
-        DialogUtils.showDialogListAndInput(data, "请选择附加描述", this, InputType.TYPE_CLASS_TEXT, new DialogUtils.DialogListOnItem() {
-            @Override
-            public void onItem(String data) {
-                mPbExtraDes.setValue(data);
-            }
-        });
     }
 
     private void goNext() {
@@ -437,9 +441,14 @@ public class HandWriteActivity extends BaseActivity implements View.OnClickListe
             T.showShort(this, "请先填写尺寸");
             return;
         }
+        if (TextUtils.isEmpty(mPbUnitSubType.getValue())) {
+            T.showShort(this, "请先选择组件子类型");
+            return;
+        }
         int size = Integer.parseInt(mPbSize.getValue());
         mHandVo.setChicun(size);
-        ExtensionActivity.startActivity(this, mHandVo.getKuozhan(), mHandVo.getChicun(), REQUEST_EXTENSION);
+        boolean isKonglengsidu = mPbUnitSubType.getValue().equals("空冷丝堵");
+        ExtensionActivity.startActivity(this, mHandVo.getKuozhan(), mHandVo.getChicun(), REQUEST_EXTENSION, isKonglengsidu);
     }
 
     private void save() {

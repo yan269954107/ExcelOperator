@@ -33,6 +33,7 @@ public class HandVo implements Serializable, Cloneable{
     private String nanyujianceyuanyin = "";
     private String zujianbeijueyuan = "";
     private String kuozhan = "";
+    private int konglengsiduRow = -1;
 
     private ArrayList<HandVo> mExtensions;
     private int mRow;
@@ -265,6 +266,14 @@ public class HandVo implements Serializable, Cloneable{
 
     public void setDanwei2(String danwei2) {
         this.danwei2 = danwei2;
+    }
+
+    public int getKonglengsiduRow() {
+        return konglengsiduRow;
+    }
+
+    public void setKonglengsiduRow(int konglengsiduRow) {
+        this.konglengsiduRow = konglengsiduRow;
     }
 
     @Override
