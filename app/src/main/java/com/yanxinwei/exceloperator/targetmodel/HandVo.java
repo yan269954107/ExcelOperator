@@ -17,10 +17,10 @@ public class HandVo implements Serializable, Cloneable{
     private String zhuyaocankaowu = "";
     private String fangxiang = "";
     private double juli = -1;
-    private String danwei1 = "";
+    private String danwei1 = "米";
     private double louceng;
     private double gaodu = -1;
-    private String danwei2 = "";
+    private String danwei2 = "米";
     private String fujiamiaoshu = "";
     private String zujianleixing = "";
     private String zujianzileixing = "";

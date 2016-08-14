@@ -127,13 +127,23 @@
         tools:text="附加描述"/>
 
     <TextView
-        android:id="@+id/txt_high"
+        android:id="@+id/txt_expand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/txt_extra"
         android:layout_toRightOf="@+id/txt_extra"
+        tools:text="扩展"/>
+
+    <TextView
+        android:id="@+id/txt_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/txt_expand"
+        android:layout_toRightOf="@+id/txt_expand"
         tools:text="高空"/>
 
     <TextView
@@ -155,16 +165,6 @@
         android:layout_toEndOf="@+id/txt_unreachable"
         android:layout_toRightOf="@+id/txt_unreachable"
         tools:text="保温"/>
-
-    <TextView
-        android:id="@+id/txt_expand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/txt_preserve"
-        android:layout_toRightOf="@+id/txt_preserve"
-        tools:text="扩展"/>
 
     <View
         android:layout_width="match_parent"

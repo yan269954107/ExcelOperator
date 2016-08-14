@@ -80,10 +80,16 @@ public class TargetsAdapter extends BaseAdapter {
         holder.txtUnitType.setText(handVo.getZujianleixing());
         holder.txtUnitSubType.setText(handVo.getZujianzileixing());
         holder.txtExtra.setText(handVo.getFujiamiaoshu());
-        holder.txtHigh.setText("高空:" + getDescription(handVo.getNanyichuji()));
-        holder.txtUnreachable.setText("不可达:" + getDescription(handVo.getNanyujiance()));
-        holder.txtPreserve.setText("保温:" + getDescription(handVo.getZujianbeijueyuan()));
         holder.txtExpand.setText(handVo.getKuozhan());
+        if (getYesOrNo(handVo.getNanyichuji())) {
+            holder.txtHigh.setText("高空");
+        }
+        if (getYesOrNo(handVo.getNanyujiance())) {
+            holder.txtUnreachable.setText("不可达");
+        }
+        if (getYesOrNo(handVo.getZujianbeijueyuan())) {
+            holder.txtPreserve.setText("保温");
+        }
         return convertView;
     }
 
@@ -92,6 +98,14 @@ public class TargetsAdapter extends BaseAdapter {
             return "否";
         } else {
             return str;
+        }
+    }
+
+    private boolean getYesOrNo(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return false;
+        } else {
+            return true;
         }
     }
 

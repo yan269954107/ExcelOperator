@@ -97,11 +97,11 @@ public class ExtensionActivity extends AppCompatActivity {
                 extension.setSize(mSize);
                 if (isKonglengsidu) {
                     extension.setSymbol("KP");
+                    extension.setRow(++maxRow);
                 } else {
                     extension.setSymbol("");
                 }
                 extension.setCount(1);
-                extension.setRow(++maxRow);
                 createExtension(extension);
                 return true;
             case android.R.id.home:
